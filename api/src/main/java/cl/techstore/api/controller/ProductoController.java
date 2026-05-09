@@ -9,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/productos")//ruta
+@RequestMapping("/api/productos")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
-
     @GetMapping
     public ResponseEntity<List<Producto>> listarpProductos(){
-        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.crearProducto());
+        return ResponseEntity.ok(productoService.listarpProductos());
+    }
+    @PostMapping
+    public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.crearProducto(producto));
     }
 }

@@ -6,35 +6,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+// ... (imports)
 @Service
 public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
-    //muestra productos activos (borrado logico)
+
     public List<Producto> listarpProductos(){
         return productoRepository.findByActivoTrue();
     }
-    //cera productos
+
     public Producto crearProducto(Producto producto){
         return productoRepository.save(producto);
     }
-    //modificar producto existente
+
     public Producto modificaProducto(Long id, Producto detalles){
-        Producto Producto = productoRepository.findById(id).orElseThrow() ;
-        new RuntimeException("Producto no encontrado");
-        Producto.setNombre(detalles.getNombre());
-        Producto.setDescripcion(detalles.getDescripcion());
-        Producto.setPrecio(detalles.getPrecio());
-        Producto.setStock(detalles.getStock());
-        Producto.setCategoria(detalles.getCategoria());
-        return productoRepository.save(Producto);
-    }
-    //borrado logico
-    public void borrarProducto(Long id){
-        Producto Producto = productoRepository.findById(id).orElseThrow() ;
-        new RuntimeException("Producto no encontrado");
-        Producto.setActivo(false);
-        productoRepository.save(Producto);
+        // Corregido: El lanzamiento de la excepción debe ir dentro de orElseThrow [cite: 50]
+        Producto productoExistente = productoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        productoExistente.setNombre(detalles.getNombre());
+        productoExistente.setDescripcion(detalles.getDescripcion());
+        productoExistente.setPrecio(detalles.getPrecio());
+        productoExistente.setStock(detalles.getStock());
+        productoExistente.setCategoria(detalles.getCategoria());
+        return productoRepository.save(productoExistente);
     }
 
+    public void borrarProducto(Long id){
+        Producto productoExistente = productoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        
+        productoExistente.setActivo(false); // Borrado lógico [cite: 205-206]
+        productoRepository.save(productoExistente);
+    }
 }
