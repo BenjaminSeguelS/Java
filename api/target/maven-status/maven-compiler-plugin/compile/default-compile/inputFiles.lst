@@ -1,0 +1,6 @@
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/model/Producto.java
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/service/ProductoService.java
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/Repository/ProductoRepository.java
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/security/JwtUtil.java
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/ApiApplication.java
+/home/bnj/Descargas/api/src/main/java/cl/techstore/api/controller/ProductoController.java

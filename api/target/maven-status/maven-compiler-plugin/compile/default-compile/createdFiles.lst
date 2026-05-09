@@ -1,0 +1,4 @@
+cl/techstore/api/model/Producto.class
+cl/techstore/api/service/ProductoService.class
+cl/techstore/api/security/JwtUtil.class
+cl/techstore/api/Repository/ProductoRepository.class
